@@ -1,0 +1,8 @@
+# Parâmetros utilizados quando se executa os códigos desta pasta diretamente
+
+chromeDriver:                                 # caminho completo do chromedriver, inculindo o nome do arquivo. Ex.: E:\Users\usuario\desktop\chromedriver.exe 
+diretorioDownloads:                           # diretório padrão de download do navegador Chrome. Ex.: E:\Users\usuario\Downloads
+
+fileCompAtual: \ibov.csv
+fileCompTeorica: \IBOVQuad_5-2023.csv
+fileEstatisicas: \statusinvest-busca-avancada.csv
