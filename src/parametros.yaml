@@ -1,16 +1,16 @@
 
-arquivoComposicao: \ibov.csv                          # nome do arquivo de composição atual do IBOV que será baixado
-arquivoCompTeorica: \IBOVQuad_1-2023.csv              # nome do arquivo de composição teórica do IBOV que será baixado
-arquivoEstatisicas: \statusinvest-busca-avancada.csv  # nome do arquivo de estatísticas que será baixado
+arquivoComposicao: ibov.csv                           # nome do arquivo de composição atual do IBOV que será baixado
+arquivoCompTeorica: IBOVQuad_1-2023.csv               # nome do arquivo de composição teórica do IBOV que será baixado
+arquivoEstatisicas: statusinvest-busca-avancada.csv   # nome do arquivo de estatísticas que será baixado
 
 saveDirectory: src\arquivos\                          # diretório onde o resultado dos cálculos será salvo
+chromeDriver: src\driver\chromedriver.exe             # caminho completo do chromedriver, inculindo o nome do arquivo. Ex.: E:\Users\usuario\desktop\chromedriver.exe 
 
 arquivoConsideradas: acoes_listadas_B3.txt            # nome do arquivo onde as ações consideradas serão registradas
 arquivoDesconsideradas: acoes_desconsideradas_B3.txt  # nome do arquivo onde as ações desconsideradas serão registradas
 arquivoConsideradasIBOV: comp_atual_IBOV.txt          # nome do arquivo onde as ações consideradas serão registradas
 
-# Edite os parâmetros abaixo conforme sua escolha
+# Edite os parâmetros abaixo
 
-chromeDriver:                                         # caminho completo do chromedriver, inculindo o nome do arquivo. Ex.: E:\Users\usuario\desktop\chromedriver.exe 
-pathDownloads:                                        # diretório padrão de download do navegador Chrome. Ex.: E:\Users\usuario\Downloads
-liquidezMinima:                                       # valor mínimo de liquidez diária desejado. Ex.: 500000
+pathDownloads:                      # diretório padrão de download do navegador Chrome. Ex.: E:\Users\usuario\Downloads\
+liquidezMinima: 500000                                       # valor mínimo de liquidez diária desejado. Ex.: 500000

@@ -2,8 +2,8 @@
     Calcula o valor intrínseco de todas as ações listadas na B3
 """
 
-from ferramentas.baixa_estatisticas import download_estatisticas
 from ferramentas.exceptions import ArquivoNaoBaixadoException
+from ferramentas.baixa_estatisticas import download_estatisticas
 
 import pandas as pd
 import yaml

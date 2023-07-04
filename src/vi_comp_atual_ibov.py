@@ -2,9 +2,9 @@
     Este código calcula o valor intrínseco de todas as ações que fazem parte da composição atual do Ibovespa
 """
 
+from ferramentas.exceptions import ArquivoNaoBaixadoException
 from ferramentas.baixa_estatisticas import download_estatisticas
 from ferramentas.baixa_comp_ibov import composicao
-from ferramentas.exceptions import ArquivoNaoBaixadoException
 
 import pandas as pd
 import yaml

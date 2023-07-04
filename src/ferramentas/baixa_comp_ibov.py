@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
-from selenium.common.exceptions import TimeoutException, SessionNotCreatedException
+from selenium.common.exceptions import TimeoutException, SessionNotCreatedException, WebDriverException
 
 import pandas as pd
 import datetime
@@ -52,7 +52,7 @@ def composicao(downloads, file_composicao, chromeDriver):
                 navegador.execute_script("arguments[0].click();", download)  # Executa o clique usando JavaScript
 
                 while not os.path.isfile(nome_antigo): continue
-                os.rename(nome_antigo, novo_nome)  # renomeia o arquivo para ibov.csv
+                os.rename(nome_antigo, novo_nome)
 
                 print(f"\nArquivo de composicao baixado com sucesso!")
                 return novo_nome
@@ -61,7 +61,10 @@ def composicao(downloads, file_composicao, chromeDriver):
                 raise ArquivoNaoBaixadoException("o botão de download não foi encontrado. Confira o XPATH do botão e tente novamente")
 
     except SessionNotCreatedException as e:
-        raise ArquivoNaoBaixadoException("não foi possível iniciar o navegador. \n\n" + e.msg)    
+        raise ArquivoNaoBaixadoException("não foi possível iniciar o navegador. O chromedriver está desatualizado.\n\n" + e.msg)
+    
+    except WebDriverException as e:
+        raise ArquivoNaoBaixadoException("não foi possível iniciar o navegador. Chromedriver não encontrado.\n\n" + e.msg)   
 
 def composicaoTeorica(downloads, file_composicao_teorica, chromeDriver):
 
@@ -104,7 +107,10 @@ def composicaoTeorica(downloads, file_composicao_teorica, chromeDriver):
                 raise ArquivoNaoBaixadoException("o botão de seleção da composição não foi encontrado. Confira o XPATH do botão e tente novamente")
 
     except SessionNotCreatedException as e:
-        raise ArquivoNaoBaixadoException("não foi possível iniciar o navegador. \n\n" + e.msg)        
+        raise ArquivoNaoBaixadoException("não foi possível iniciar o navegador. O chromedriver está desatualizado.\n\n" + e.msg)
+    
+    except WebDriverException as e:
+        raise ArquivoNaoBaixadoException("não foi possível iniciar o navegador. Chromedriver não encontrado.\n\n" + e.msg)     
 
 if __name__ == '__main__':
 
@@ -116,8 +122,8 @@ if __name__ == '__main__':
             args = yaml.load(parametros, yaml.SafeLoader)
 
         try:
-            name = composicao(args['diretorioDownloads'], args['fileCompAtual'], chromeDriver=args['chromeDriver'])
-            # name = composicaoTeorica(args['diretorioDownloads'], args['fileCompTeorica'], chromeDriver=args['chromeDriver'])
+            # name = composicao(args['diretorioDownloads'], args['fileCompAtual'], chromeDriver=args['chromeDriver'])
+            name = composicaoTeorica(args['diretorioDownloads'], args['fileCompTeorica'], chromeDriver=args['chromeDriver'])
 
             dataFrame = pd.read_csv(name, sep=';', encoding='ANSI', 
                                     names=['Código', 'Ação', 'Tipo', 'Qtde. Teórica', 'Part. (%)', 0], skiprows=[0, 1])

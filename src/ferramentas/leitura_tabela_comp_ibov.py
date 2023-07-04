@@ -9,7 +9,7 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support import expected_conditions as ec
-from selenium.common.exceptions import TimeoutException, SessionNotCreatedException
+from selenium.common.exceptions import TimeoutException, SessionNotCreatedException, WebDriverException
 
 import pandas as pd
 import yaml
@@ -53,7 +53,10 @@ def leComposicao(chromedriver):
                 raise LeituraTabelaException("o campo de seleção do tamanho da tabela não foi encontrado. Confira o ID do campo e tente novamente")
 
     except SessionNotCreatedException as e:
-        raise LeituraTabelaException("não foi possível iniciar o navegador. \n\n" + e.msg)
+        raise LeituraTabelaException("não foi possível iniciar o navegador. O chromedriver está desatualizado.\n\n" + e.msg)
+    
+    except WebDriverException as e:
+        raise LeituraTabelaException("não foi possível iniciar o navegador. Chromedriver não encontrado.\n\n" + e.msg)   
 
 
 def leComposicaoTeorica(chromedriver):
@@ -103,7 +106,10 @@ def leComposicaoTeorica(chromedriver):
                 raise LeituraTabelaException("o botão de seleção não foi encontrado. Confira o XPATH do botão e tente novamente")
 
     except SessionNotCreatedException as e:
-        raise LeituraTabelaException("não foi possível iniciar o navegador. \n\n" + e.msg)
+        raise LeituraTabelaException("não foi possível iniciar o navegador. O chromedriver está desatualizado.\n\n" + e.msg)
+    
+    except WebDriverException as e:
+        raise LeituraTabelaException("não foi possível iniciar o navegador. Chromedriver não encontrado.\n\n" + e.msg)   
 
 
 if __name__ == '__main__':
@@ -116,7 +122,7 @@ if __name__ == '__main__':
             args = yaml.load(parametros, yaml.SafeLoader)
 
         try:
-            # dataFrame = leComposicao(args['chromeDriver'])
+            dataFrame = leComposicao(args['chromeDriver'])
             dataFrame = leComposicaoTeorica(args['chromeDriver'])
 
             print(f"\n{dataFrame}\n")

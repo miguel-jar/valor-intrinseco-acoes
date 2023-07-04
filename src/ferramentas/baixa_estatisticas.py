@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support import expected_conditions as ec
-from selenium.common.exceptions import TimeoutException, SessionNotCreatedException
+from selenium.common.exceptions import TimeoutException, SessionNotCreatedException, WebDriverException
 
 import pandas as pd
 import os
@@ -17,8 +17,6 @@ import yaml
 def download_estatisticas(path, file_estatisicas, chromedriver):
 
     nome_arquivo = path + file_estatisicas
-
-    # verifica se há um arquivo com o mesmo nome do que vai ser baixado. Se sim, remove o arquivo
 
     if os.path.isfile(nome_arquivo):  
         os.remove(nome_arquivo)
@@ -32,7 +30,7 @@ def download_estatisticas(path, file_estatisicas, chromedriver):
             wdw = WebDriverWait(navegador, timeout=5)
 
             navegador.maximize_window()
-            navegador.get('https://statusinvest.com.br/acoes/busca-avancada')  # acessa a página
+            navegador.get('https://statusinvest.com.br/acoes/busca-avancada')
 
             xpath_botao_busca = '//*[@id="main-2"]/div[3]/div/div/div/button[2]'
             xpath_botao_download = '//*[@id="main-2"]/div[4]/div/div[1]/div[2]/a'
@@ -57,7 +55,10 @@ def download_estatisticas(path, file_estatisicas, chromedriver):
                 raise ArquivoNaoBaixadoException("o botão de busca não foi encontrado. Confira o XPATH do botão e tente novamente")
 
     except SessionNotCreatedException as e:
-        raise ArquivoNaoBaixadoException("não foi possível iniciar o navegador. \n\n" + e.msg)
+        raise ArquivoNaoBaixadoException("não foi possível iniciar o navegador. O chromedriver está desatualizado.\n\n" + e.msg)
+    
+    except WebDriverException as e:
+        raise ArquivoNaoBaixadoException("não foi possível iniciar o navegador. Chromedriver não encontrado.\n\n" + e.msg)     
 
 
 if __name__ == '__main__':
