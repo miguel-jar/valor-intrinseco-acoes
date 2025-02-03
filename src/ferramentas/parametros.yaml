@@ -9,4 +9,4 @@ chromeDriver: src\driver\chromedriver.exe
 
 # Edite os parâmetros abaixo 
 
-diretorioDownloads:    # diretório padrão de download do navegador Chrome. Ex.: E:\Users\usuario\Downloads\
+diretorioDownloads: C:\Users\batut\Downloads\   # diretório padrão de download do navegador Chrome. Ex.: E:\Users\usuario\Downloads\

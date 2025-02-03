@@ -12,5 +12,5 @@ arquivoConsideradasIBOV: comp_atual_IBOV.txt          # nome do arquivo onde as 
 
 # Edite os parâmetros abaixo
 
-pathDownloads:                      # diretório padrão de download do navegador Chrome. Ex.: E:\Users\usuario\Downloads\
+pathDownloads: C:\Users\batut\Downloads\                     # diretório padrão de download do navegador Chrome. Ex.: E:\Users\usuario\Downloads\
 liquidezMinima: 500000                                       # valor mínimo de liquidez diária desejado. Ex.: 500000
